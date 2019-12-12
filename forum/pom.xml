@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>br.com.alura</groupId>
+	<artifactId>forum</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>forum</name>
+	<description>Criação do Projeto Fórum para o curso de Spring Boot I da Alura</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<spring.boot.starter.version>2.2.1.RELEASE</spring.boot.starter.version>
+	</properties>
+
+	<dependencies>
+		<!-- Starter do Spring Web MVC e Spring Core -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.starter.version}</version>
+		</dependency>
+		
+		<!-- Starter do Spring DevTools para reinicializar o contêiner automaticamente -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>${spring.boot.starter.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- Starter do Spring Data para utilização com o JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring.boot.starter.version}</version>
+		</dependency>
+		
+		<!-- Conector do MySQL para Java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring.boot.starter.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.starter.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
