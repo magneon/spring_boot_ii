@@ -37,6 +37,13 @@
 			<version>${spring.boot.starter.version}</version>
 		</dependency>
 		
+		<!-- Starter do Spring Cache -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+			<version>${spring.boot.starter.version}</version>
+		</dependency>
+		
 		<!-- Conector do MySQL para Java -->
 		<dependency>
 			<groupId>mysql</groupId>

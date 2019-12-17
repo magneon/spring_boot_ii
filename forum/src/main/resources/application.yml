@@ -7,7 +7,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      properties:
+        format_sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true  
+    show-sql: true
+    format_sql: true

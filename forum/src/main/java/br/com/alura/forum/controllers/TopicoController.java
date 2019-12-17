@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -42,6 +44,7 @@ public class TopicoController {
 	private CursoRepository repositoryCurso;
 	
 	@GetMapping
+	@Cacheable(value = "topicos")
 	//public Page<TopicoDTO> topicos(@RequestParam(required = false) String nomeCurso, @RequestParam int pagina, @RequestParam int quantidade, @RequestParam String ordenacao) {
 	public Page<TopicoDTO> topicos(@RequestParam(required = false) String nomeCurso, @PageableDefault(page = 0, size = 10, direction = Sort.Direction.ASC, sort = "titulo") Pageable paginacao) {
 		Page<Topico> topicos = null;
@@ -50,13 +53,14 @@ public class TopicoController {
 			topicos = repositoryTopico.findAll(paginacao);
 		} else {
 			topicos = repositoryTopico.findByCursoNome(nomeCurso, paginacao);
-//			topicos = repositoryTopico.pegaPorCursoNome(nomeCurso);
+			//topicos = repositoryTopico.pegaPorCursoNome(nomeCurso);
 		}
 		return TopicoDTO.converter(topicos);
 	}
 	
 	@Transactional
 	@PostMapping
+	@CacheEvict(value = "topicos", allEntries = true)
 	public ResponseEntity<TopicoDTO> cadastrar(@RequestBody @Valid TopicoForm form, UriComponentsBuilder uriBuilder) {
 		Topico topico = form.converter(repositoryCurso);
 		
@@ -80,6 +84,7 @@ public class TopicoController {
 	
 	@Transactional
 	@PutMapping("/{id}")
+	@CacheEvict(value = "topicos", allEntries = true)
 	public ResponseEntity<TopicoDTO> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizaTopicoForm form) {
 		Optional<Topico> optional = repositoryTopico.findById(id);
 		if (optional.isPresent()) {
@@ -93,6 +98,7 @@ public class TopicoController {
 	
 	@Transactional
 	@DeleteMapping("/{id}")
+	@CacheEvict(value = "topicos", allEntries = true)
 	public ResponseEntity<?> remover(@PathVariable Long id) {
 		Optional<Topico> optional = repositoryTopico.findById(id);
 		if (optional.isPresent()) {
