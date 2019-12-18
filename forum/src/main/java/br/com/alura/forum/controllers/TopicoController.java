@@ -78,8 +78,7 @@ public class TopicoController {
 			return ResponseEntity.ok(new DetalheTopicoDTO(optional.get()));			
 		}
 		
-		return ResponseEntity.notFound().build();
-		
+		return ResponseEntity.notFound().build();		
 	}
 	
 	@Transactional
