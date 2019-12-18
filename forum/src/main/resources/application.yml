@@ -14,3 +14,8 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     format_sql: true
+    
+forum:
+  jwt:
+    expiracao: 1800000
+    secret: dGJQZu165ynzPcDo5C617fZouP444rRoQ4749Obhlm_RODF25f3ez_MA03KksNrD1dg4RXr0Zx8kRz2NkZQLZ-_e99aNOrr7-Qr_HyBzyRrd8mhVjmIgqy4EVS56zhv2IA5AN1PAy0Oz6ZAWnWzkiy16Lyacss23g7C4ip4y91wJwTRDQxa7XJxCwjWLDAPQhMnBcmgkLUn9pjfD6GyyU3uU0wTN0Bdm1SmmT2LjJGOshUmCkXFC_9I4zwk_7e-xnBi0MA2yxw-fTrFoPFjI4S6C_Txyjb7ro8h3WURMA1VbAmcBcSv9YzG9eCElhDbym5T1YxyTT3a4Rp-yvO5OPw
