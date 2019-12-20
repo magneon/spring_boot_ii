@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import br.com.alura.forum.filters.AutenticacaoTokenFilter;
+import br.com.alura.forum.repositories.UsuarioRepository;
 import br.com.alura.forum.services.AutenticacaoService;
 import br.com.alura.forum.services.TokenService;
 
@@ -27,6 +28,9 @@ public class ForumApplicationSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private TokenService serviceToken;
+	
+	@Autowired
+	private UsuarioRepository repositoryUsuario;
 	
 	@Override
 	@Bean
@@ -47,7 +51,7 @@ public class ForumApplicationSecurity extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated().and()
 			.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and().addFilterBefore(new AutenticacaoTokenFilter(serviceToken), UsernamePasswordAuthenticationFilter.class);
+			.and().addFilterBefore(new AutenticacaoTokenFilter(serviceToken, repositoryUsuario), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Override
