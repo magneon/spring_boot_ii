@@ -12,8 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import br.com.alura.forum.filters.AutenticacaoTokenFilter;
 import br.com.alura.forum.services.AutenticacaoService;
+import br.com.alura.forum.services.TokenService;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +24,9 @@ public class ForumApplicationSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private AutenticacaoService autenticacaoService;
+	
+	@Autowired
+	private TokenService serviceToken;
 	
 	@Override
 	@Bean
@@ -40,7 +46,8 @@ public class ForumApplicationSecurity extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.POST, "/auth").permitAll()
 			.anyRequest().authenticated().and()
 			.csrf().disable()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and().addFilterBefore(new AutenticacaoTokenFilter(serviceToken), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Override
